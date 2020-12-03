@@ -1,0 +1,185 @@
+<nb-card *ngIf="showListing">
+
+    <nb-card-header>
+      Trivia <button class="btn-import"  type="button" nbButton status="success" (click) ="importQuestion()" >Import Questions</button>
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source" (create)="createQuestion()" (edit) = "editQuestion($event)" (delete)="onDeleteConfirm($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showImport">
+  <nb-card-header>
+    Import CSV
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="importForm" (ngSubmit)="onImportConfirm()" autocomplete="off">
+
+      <div class="form-group row">
+        <label for="inputCSV" class="label col-sm-3 col-form-label">Upload CSV File</label>
+        <div class="col-sm-9">
+          <input type="file" accept=".csv"  nbInput fullWidth (change)="uploadCSVFile($event)">
+          <input type="hidden" formControlName="csvData" nbInput fullWidth id="inputCSV">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <ng2-smart-table [settings]="settingCsv" [source]="source1"></ng2-smart-table>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button type="submit" [disabled]="!importForm.valid" nbButton status="success">Import</button>&nbsp;&nbsp;
+          <button type="button" (click) = "resetListing()" nbButton status="primary">Cancel</button>
+        </div>
+      </div>
+
+    </form>
+    
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showAddForm">
+  <nb-card-header>
+    Add Question
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="profileForm" (ngSubmit)="onCreateConfirm()" autocomplete="off">
+
+      <div class="form-group row">
+        <label for="inputType" class="label col-sm-3 col-form-label">Topic</label>
+        <div class="col-lg-9">
+          <nb-select formControlName="topic">
+            <nb-option value="{{item}}" *ngFor="let item of topics">{{item}}</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Question</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="question" nbInput fullWidth id="inputName" placeholder="Question" required autocomplete="off">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Option 1</label>
+        <div class="col-sm-7">  
+          <input type="text" formControlName="option_1_text" nbInput fullWidth id="inputOptionText1">      
+        </div>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="option_1_value" (click) = "chkAnswer(1)"></nb-checkbox>
+        </div>        
+      </div>
+
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Option 2</label>
+        <div class="col-sm-7">
+          <input type="text" formControlName="option_2_text" nbInput fullWidth id="inputOptionText2">       
+        </div>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="option_2_value" (click) = "chkAnswer(2)"></nb-checkbox>
+        </div>        
+      </div>
+
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Option 3</label>
+        <div class="col-sm-7">
+          <input type="text" formControlName="option_3_text" nbInput fullWidth id="inputOptionText3">       
+        </div>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="option_3_value" (click) = "chkAnswer(3)"></nb-checkbox>
+        </div>        
+      </div>
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Option 4</label>
+        <div class="col-sm-7">
+          <input type="text" formControlName="option_4_text" nbInput fullWidth id="inputOptionText4">       
+        </div>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="option_4_value" (click) = "chkAnswer(4)"></nb-checkbox>
+        </div>        
+      </div>
+      
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button type="submit" [disabled]="!profileForm.valid" nbButton status="success">Save</button>&nbsp;&nbsp;
+          <button type="button" (click) = "resetListing()" nbButton status="primary">Cancel</button>
+        </div>
+      </div>
+
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showEditForm">
+  <nb-card-header>
+    Edit Question
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="profileForm" (ngSubmit)="onEditConfirm()" autocomplete="off">
+
+      <div class="form-group row">
+        <label for="inputType" class="label col-sm-3 col-form-label">Type</label>
+        <div class="col-lg-9">
+          <nb-select formControlName="topic">
+            <nb-option value="{{item}}" *ngFor="let item of topics">{{item}}</nb-option>
+          </nb-select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Question</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="question" nbInput fullWidth id="inputName" placeholder="Question" required autocomplete="off">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Option 1</label>
+        <div class="col-sm-7">  
+          <input type="text" formControlName="option_1_text" nbInput fullWidth id="inputOptionText1">      
+        </div>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="option_1_value" (click) = "chkAnswer(1)"></nb-checkbox>
+        </div>        
+      </div>
+
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Option 2</label>
+        <div class="col-sm-7">
+          <input type="text" formControlName="option_2_text" nbInput fullWidth id="inputOptionText2">       
+        </div>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="option_2_value" (click) = "chkAnswer(2)"></nb-checkbox>
+        </div>        
+      </div>
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Option 3</label>
+        <div class="col-sm-7">
+          <input type="text" formControlName="option_3_text" nbInput fullWidth id="inputOptionText3">       
+        </div>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="option_3_value" (click) = "chkAnswer(3)"></nb-checkbox>
+        </div>        
+      </div>
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Option 4</label>
+        <div class="col-sm-7">
+          <input type="text" formControlName="option_4_text" nbInput fullWidth id="inputOptionText4">       
+        </div>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="option_4_value" (click) = "chkAnswer(4)"></nb-checkbox>
+        </div>        
+      </div>
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button type="submit" [disabled]="!profileForm.valid" nbButton status="success">Save</button>&nbsp;&nbsp;
+          <button type="button" (click) = "resetListing()" nbButton status="primary">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

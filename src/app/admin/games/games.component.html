@@ -1,0 +1,141 @@
+<nb-card *ngIf="showListing">
+    <nb-card-header>
+      Games
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source" (create)="createGame()" (edit) = "editGame($event)" (delete)="onDeleteConfirm($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showAddForm">
+  <nb-card-header>
+    Add Game
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="profileForm" (ngSubmit)="onCreateConfirm()">
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="name" nbInput fullWidth id="inputName" placeholder="Name" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Image</label>
+        <div class="col-sm-9">
+          <input type="file" accept="image/*"  nbInput fullWidth (change)="uploadFile($event)">
+          <input type="hidden" formControlName="picture" nbInput fullWidth id="inputImage">
+        </div>
+      </div>
+      <div class="form-group row" >
+        <label for="inputCredit" class="label col-sm-3 col-form-label">Credits</label>
+        <div class="col-lg-9">
+          <input type="text" (input)="checkfirstZero($event)" name="credits" formControlName="credits" nbInput fullWidth id="credits" placeholder="Credits" >
+        </div>
+      </div>
+      <div class="form-group row" >
+        <label for="inputQuestions" class="label col-sm-3 col-form-label">Questions</label>
+        <div class="col-lg-9">
+          <input type="text" name="questions" formControlName="questions" nbInput fullWidth id="questions" placeholder="questions" >
+        </div>
+      </div>
+      <div class="form-group row" >
+        <label for="inputtimer" class="label col-sm-3 col-form-label">Timer (In Seconds)</label>
+        <div class="col-lg-9">
+          <input type="text" (input)="checkfirstZero($event)" name="timer" formControlName="timer" nbInput fullWidth id="timer" placeholder="Time in seconds" >
+        </div>
+      </div>      
+      <div class="form-group row">
+        <label for="inputcodes" class="label col-sm-3 col-form-label">Topics</label>
+        <div class="col-sm-4">
+          <input type="text" (input)="topic=$event.target.value" [value]="topic" nbInput fullWidth id="inputtopics" placeholder="Topics" required>
+        </div>
+        <div class="col-sm-4">
+          <button type="button" (click) = "addTopic()" nbButton status="primary">Add Topic</button>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="topics" class="label col-sm-3 col-form-label">&nbsp;</label>
+        <div class="col-sm-9">
+          <div *ngFor="let item of topics" class="code-list">{{item}}<a href="Javascript:void(0)" (click) = "removeTopic(item);">X</a></div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button type="submit" [disabled]="!profileForm.valid" nbButton status="success">Save</button>&nbsp;&nbsp;
+          <button type="button" (click) = "resetListing()" nbButton status="primary">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showEditForm">
+  <nb-card-header>
+    Edit Game
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="profileForm" (ngSubmit)="onEditConfirm()">
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="name" nbInput fullWidth id="inputName" placeholder="Name" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Image</label>
+        <div class="col-sm-8">
+          <input type="file" accept="image/*"  nbInput fullWidth (change)="uploadFile($event)">
+          <input type="hidden" formControlName="picture" nbInput fullWidth id="inputImage">
+        </div>
+        <div class="col-sm-1" class="icon-img"><div [style.background-image]="'url(' + game_icon + ')'"  ></div></div>
+      </div>
+      <div class="form-group row" >
+        <label for="inputCredit" class="label col-sm-3 col-form-label">Credits</label>
+        <div class="col-lg-9">
+          <input type="text" (input)="checkfirstZero($event)" name="credits" formControlName="credits" nbInput fullWidth id="credits" placeholder="Credits" >
+        </div>
+      </div>
+
+      <div class="form-group row" >
+        <label for="inputQuestions" class="label col-sm-3 col-form-label">Questions</label>
+        <div class="col-lg-9">
+          <input type="text" name="questions" formControlName="questions" nbInput fullWidth id="questions" placeholder="questions" >
+        </div>
+      </div>
+      
+      <div class="form-group row" >
+        <label for="inputtimer" class="label col-sm-3 col-form-label">Timer (In Seconds)</label>
+        <div class="col-lg-9">
+          <input type="text" (input)="checkfirstZero($event)" name="timer" formControlName="timer" nbInput fullWidth id="timer" placeholder="Time in seconds" >
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputcodes" class="label col-sm-3 col-form-label">Topics</label>
+        <div class="col-sm-4">
+          <input type="text" (input)="topic=$event.target.value" [value]="topic" nbInput fullWidth id="inputtopics" placeholder="Topics" required>
+        </div>
+        <div class="col-sm-4">
+          <button type="button" (click) = "addTopic()" nbButton status="primary">Add Topic</button>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="topics" class="label col-sm-3 col-form-label">&nbsp;</label>
+        <div class="col-sm-9">
+          <div *ngFor="let item of topics" class="code-list">{{item}}<a href="Javascript:void(0)" (click) = "removeTopic(item);">X</a></div>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button type="submit" [disabled]="!profileForm.valid" nbButton status="success">Save</button>&nbsp;&nbsp;
+          <button type="button" (click) = "resetListing()" nbButton status="primary">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

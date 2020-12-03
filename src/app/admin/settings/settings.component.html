@@ -1,0 +1,180 @@
+<nb-card *ngIf="showListing">
+    <nb-card-header>
+      Application Settings
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source" (create)="createSetting()" (edit) = "editSetting($event)" (delete)="onDeleteConfirm($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showAddForm">
+  <nb-card-header>
+   Application Settings ADD
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="profileForm" (ngSubmit)="onCreateConfirm()">
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="app_name" nbInput fullWidth id="inputName" placeholder="Name" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Description</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="app_description" nbInput fullWidth id="inputDesc" placeholder="Description">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Version</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="app_version" nbInput fullWidth id="inputVersion" placeholder="Version" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Icon</label>
+        <div class="col-sm-9">
+          <input type="file" accept="image/*"  nbInput fullWidth (change)="uploadFile($event)">
+          <input type="hidden" formControlName="app_icon" nbInput fullWidth id="inputIcon">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Agora Account Id</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="agora_account_id" nbInput fullWidth id="inputaccountid" placeholder="Agora Account Id">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Agora Token</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="agora_token" nbInput fullWidth id="inputAgoraToken" placeholder="Free agora_token">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Free Month</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="free_month" nbInput fullWidth id="inputFreeMonth" placeholder="Free Month" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Free Credits</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="free_credits" nbInput fullWidth id="inputFreeCredits" placeholder="Free Credits" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Minimum Interests</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="min_interests" nbInput fullWidth id="inputMinInterests" placeholder="Min Interests" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Minimum Personalities</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="min_personalities" nbInput fullWidth id="inputMinPersonalities" placeholder="Min Personalities" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Minimum Interests</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="min_interests" nbInput fullWidth id="inputMinInterests" placeholder="Min Interests" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Minimum Personalities</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="min_personalities" nbInput fullWidth id="inputMinPersonalities" placeholder="Min Personalities" required>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button type="submit" [disabled]="!profileForm.valid"  nbButton status="success">Save</button>&nbsp;&nbsp;
+          <button type="button" (click) = "resetListing()" nbButton status="primary">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showEditForm">
+  <nb-card-header>
+  Application Settings
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="profileForm" (ngSubmit)="onEditConfirm()">
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="app_name" nbInput fullWidth id="inputName" placeholder="Name" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputDesc" class="label col-sm-3 col-form-label">Description</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="app_description" nbInput fullWidth id="inputDesc" placeholder="Description">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputVersion" class="label col-sm-3 col-form-label">Version</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="app_version" nbInput fullWidth id="inputVersion" placeholder="Version" >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputIcon" class="label col-sm-3 col-form-label">Icon</label>
+        <div class="col-sm-9">
+          <input type="file" accept="image/*"  nbInput fullWidth (change)="uploadFile($event)" >
+          <input type="hidden" formControlName="app_icon" nbInput fullWidth id="inputIcon">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputAccountId" class="label col-sm-3 col-form-label">Agora Account Id</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="agora_account_id" nbInput fullWidth id="inputAccountId" placeholder="Agora Account Id" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputAgoraToken" class="label col-sm-3 col-form-label">Agora Token</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="agora_token" nbInput fullWidth id="inputAgoraToken" placeholder="Free agora_token" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputFreeMonth" class="label col-sm-3 col-form-label">Free Month</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="free_month" nbInput fullWidth id="inputFreeMonth" placeholder="Free Month" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputFreeCredits" class="label col-sm-3 col-form-label">Free Credits</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="free_credits" nbInput fullWidth id="inputFreeCredits" placeholder="Free Credits" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputMinInterests" class="label col-sm-3 col-form-label">Minimum Interests</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="min_interests" nbInput fullWidth id="inputMinInterests" placeholder="Min Interests" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputMinPersonalities" class="label col-sm-3 col-form-label">Minimum Personalities</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="min_personalities" nbInput fullWidth id="inputMinPersonalities" placeholder="Min Personalities" required>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+          <button type="submit" [disabled]="!profileForm.valid" nbButton status="success">Save</button>&nbsp;&nbsp;
+          <button type="button" (click) = "resetListing()" nbButton status="primary">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

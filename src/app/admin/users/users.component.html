@@ -1,0 +1,190 @@
+<nb-card *ngIf="showListing">
+    <nb-card-header>
+      Users
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source" (create)="createUser()" (edit) = "editUser($event)" (delete)="onDeleteConfirm($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showAddForm">
+  <nb-card-header>
+    Add User
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="profileForm" (ngSubmit)="onCreateConfirm()">
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="name" nbInput fullWidth id="inputName" placeholder="Name" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputFBID" class="label col-sm-3 col-form-label">FB ID</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="facebook_id" nbInput fullWidth id="inputFBID" placeholder="facebook_id" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputEmail" class="label col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="email" nbInput fullWidth id="inputEmail" placeholder="email" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputMobile" class="label col-sm-3 col-form-label">Mobile</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="mobile" nbInput fullWidth id="inputMobile" placeholder="mobile" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputcredits" class="label col-sm-3 col-form-label">Credits</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="credits" nbInput fullWidth id="inputcredits" placeholder="credits" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputdrinks" class="label col-sm-3 col-form-label">Drinks</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="drinks" nbInput fullWidth id="inputdrinks" placeholder="drinks" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputbottom_up" class="label col-sm-3 col-form-label">Bottom Up</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="bottom_up" nbInput fullWidth id="inputbottom_up" placeholder="bottom_up" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputround_up" class="label col-sm-3 col-form-label">Round Up</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="round_up" nbInput fullWidth id="inputround_up" placeholder="round_up" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputratings" class="label col-sm-3 col-form-label">Rattings</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="ratings" nbInput fullWidth id="inputratings" placeholder="ratings" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputlevel" class="label col-sm-3 col-form-label">Level</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="level" nbInput fullWidth id="inputlevel" placeholder="level" disabled required>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">         
+          <button type="button" (click) = "resetListing()" nbButton status="primary">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showEditForm">
+  <nb-card-header>
+    Edit User
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="profileForm" (ngSubmit)="onEditConfirm()">
+
+      <div class="form-group row">
+        <label for="inputName" class="label col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="name" nbInput fullWidth id="inputName" placeholder="Name" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputFBID" class="label col-sm-3 col-form-label">FB ID</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="facebook_id" nbInput fullWidth id="inputFBID" placeholder="facebook_id" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputEmail" class="label col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="email" nbInput fullWidth id="inputEmail" placeholder="email" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputMobile" class="label col-sm-3 col-form-label">Mobile</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="mobile" nbInput fullWidth id="inputMobile" placeholder="mobile" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputfcm_token" class="label col-sm-3 col-form-label">FCM Token</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="fcm_token" nbInput fullWidth id="inputfcm_token" placeholder="fcm_token" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputcredits" class="label col-sm-3 col-form-label">Credits</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="credits" nbInput fullWidth id="inputcredits" placeholder="credits" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputdrinks" class="label col-sm-3 col-form-label">Drinks</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="drinks" nbInput fullWidth id="inputdrinks" placeholder="drinks" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputbottom_up" class="label col-sm-3 col-form-label">Bottom Up</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="bottom_up" nbInput fullWidth id="inputbottom_up" placeholder="bottom_up" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputround_up" class="label col-sm-3 col-form-label">Round Up</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="round_up" nbInput fullWidth id="inputround_up" placeholder="round_up" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputratings" class="label col-sm-3 col-form-label">Rattings</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="ratings" nbInput fullWidth id="inputratings" placeholder="ratings" disabled required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputlevel" class="label col-sm-3 col-form-label">Level</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="level" nbInput fullWidth id="inputlevel" placeholder="level" disabled required>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">         
+          <button type="button" (click) = "resetListing()" nbButton status="primary">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

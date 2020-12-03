@@ -1,0 +1,32 @@
+@import '../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+
+  .nb-theme-default ng2-smart-table {border: 2px solid !important;}
+
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+
+  
+  .icon-img > div{width: 100%;background-repeat: no-repeat;padding: 25px;background-position: center;}
+  
+  .list-img{width: 50px;}
+  .code-list{width: 200px; background-color: #e8e8e8; font-weight: bold; padding: 10px; float: left; margin: 0px; margin-right: 20px; margin-bottom: 20px;}
+  .code-list a{float: right;}
+
+  @include media-breakpoint-down(sm) {
+    ngx-traffic {
+      display: none;
+    }
+  }
+}
+
+:host ::ng-deep ng2-smart-table{
+  ng2-smart-table-cell{
+    img{width: 30px; }
+  }
+}
+
