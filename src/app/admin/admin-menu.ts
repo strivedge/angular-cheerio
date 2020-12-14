@@ -16,11 +16,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'people-outline',
     link: '/admin/users',
   },  
-  {
-    title: 'Tables',
-    icon: 'layout-outline',
-    link: '/admin/tables',
-  }, 
+  // {
+  //   title: 'Tables',
+  //   icon: 'layout-outline',
+  //   link: '/admin/tables',
+  // }, 
   {
     title: 'Payments',
     icon: 'layout-outline',

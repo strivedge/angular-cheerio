@@ -8,6 +8,7 @@ import { RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { environment } from "../../../../src/environments/environment";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ngx-users',
@@ -34,6 +35,10 @@ export class UsersComponent implements OnDestroy {
     display_email: new FormControl(''),
     display_mobile: new FormControl(''),
     profile_complete: new FormControl(''),
+    plan: new FormControl(''),
+    start_date: new FormControl(''),
+    end_date: new FormControl(''),
+    paid_amount: new FormControl('')
   });
 
   showListing = false;
@@ -63,10 +68,27 @@ export class UsersComponent implements OnDestroy {
       name: {
         title: 'Name',
         type: 'string',
-      }      
+      },
+      plan_data: {
+        title: 'Plan',
+        type: 'string',
+        valuePrepareFunction: (value) => { 
+          console.log(value)
+          if(value.length > 0){
+            return value[0].name;
+          }else{
+            return "Free Subscriptoin"
+          }
+        }
+      }, 
+      credits: {
+        title: 'Credits',
+        type: 'string',
+        filter: false,
+      },         
     },
     actions:{
-      add: true,
+      add: false,
       delete: false,
       position: 'right',
     },
@@ -91,8 +113,9 @@ export class UsersComponent implements OnDestroy {
 
   constructor(private themeService: NbThemeService, private service: SmartTableData, private apiService: ApiService) {  
     this.showListing = true;
-    this.apiService.getUsers().subscribe((response) => {
-      this.users = response.data.docs;
+    this.apiService.getUsersList().subscribe((response) => {
+      this.users = response.data;
+      console.log("Users",this.users)
       this.source.load(this.users);
     }),
     (err: any) => console.log(err),
@@ -120,6 +143,17 @@ export class UsersComponent implements OnDestroy {
     this.showListing = false;
     this.showAddForm = false;
     this.showEditForm = true;
+    var country_code;
+    if(row.country_code){
+      country_code = row.country_code +" ";
+    }else{
+      country_code = '';
+    }
+    if(row.plan_id != "Free Subscriptoin"){
+      row.plan_id = row.plan_data[0].name;
+    }
+    console.log("User data",row)
+    //console.log("end_date",new DatePipe('en-US').transform(row.end_date, 'dd-MM-y HH:mm:ss'))
 
     this.profileForm.patchValue({
       _id: row._id,
@@ -127,7 +161,7 @@ export class UsersComponent implements OnDestroy {
       picture: row.picture,
       facebook_id: row.facebook_id,
       email: row.email,
-      mobile: row.mobile,
+      mobile: country_code + row.mobile,
       fcm_token: row.fcm_token,
       credits: row.credits,
       drinks: row.drinks,
@@ -138,6 +172,10 @@ export class UsersComponent implements OnDestroy {
       display_email: row.display_email,
       display_mobile: row.display_mobile,
       profile_complete: row.profile_complete,
+      plan: row.plan_id,
+      start_date: new DatePipe('en-US').transform(row.start_date, 'dd-MM-y HH:mm:ss'),
+      end_date: new DatePipe('en-US').transform(row.end_date, 'dd-MM-y HH:mm:ss'),
+      paid_amount: row.paid_amount.toFixed(2),
     });
 
   }
@@ -154,8 +192,8 @@ export class UsersComponent implements OnDestroy {
     delete params._id;
     this.apiService.saveUser(params).subscribe((response) => {
       this.resetListing();
-      this.apiService.getUsers().subscribe((response) => {
-        this.users = response.data.docs;
+      this.apiService.getUsersList().subscribe((response) => {
+        this.users = response.data;
         this.source.load(this.users);
       }),
       (err: any) => console.log(err),
@@ -171,8 +209,8 @@ export class UsersComponent implements OnDestroy {
     var params = this.profileForm.value;
     this.apiService.editUser(params).subscribe((response) => {
       this.resetListing();
-      this.apiService.getUsers().subscribe((response) => {
-        this.users = response.data.docs;
+      this.apiService.getUsersList().subscribe((response) => {
+        this.users = response.data;
         this.source.load(this.users);
       }),
       (err: any) => console.log(err),
@@ -188,8 +226,8 @@ export class UsersComponent implements OnDestroy {
     if (window.confirm('Are you sure you want to delete?')) {
       var row = event.data;
       this.apiService.deleteCategory(row._id).subscribe((response) => {
-        this.apiService.getUsers().subscribe((response) => {
-          this.users = response.data.docs;
+        this.apiService.getUsersList().subscribe((response) => {
+          this.users = response.data;
           this.source.load(this.users);
         }),
         (err: any) => console.log(err),
@@ -202,4 +240,5 @@ export class UsersComponent implements OnDestroy {
     }
   }
 
+  
 }

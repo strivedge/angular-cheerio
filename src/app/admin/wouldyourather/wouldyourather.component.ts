@@ -191,8 +191,10 @@ export class WouldyouratherComponent implements OnDestroy {
             let hd = data[j].replace(/\s/g, "");
             var res = hd.toLowerCase();
             this.headerData.push(res)
+            this.headerData.push('topic')
           }else{
             row.push(data[j]);
+            row.push('would_you_rather');
           }          
         }   
         if(i != 0){ 
@@ -305,9 +307,13 @@ export class WouldyouratherComponent implements OnDestroy {
       var row = event.data;
       this.topic = {topic:'would_you_rather'};
       this.apiService.deleteQuestion(row._id).subscribe((response) => {
+        console.log("response",response)
         this.apiService.getTopicQuestion(this.topic).subscribe((response) => {
-          this.questions = response.data.docs;
+          console.log("response",response)
+          this.questions = response.data;
+          console.log("this.questions",this.questions)
           this.source.load(this.questions);
+          console.log("source",this.questions)
         }),
         (err: any) => console.log(err),
         () => {}

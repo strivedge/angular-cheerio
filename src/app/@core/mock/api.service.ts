@@ -63,6 +63,10 @@ export class ApiService{
     return this.http.get("/api/users/");
   }
 
+  getUsersList(): Observable<any> {    
+    return this.http.get("/api/users/list");
+  }
+
   saveUser(parms): Observable<any> {    
     return this.http.post("/api/users",parms);
   }

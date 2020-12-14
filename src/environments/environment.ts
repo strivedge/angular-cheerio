@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  //imagePath: 'http://localhost:3000/'
-  imagePath: 'http://3.137.121.138:3000/'
+  imagePath: 'http://localhost:3000/'
+  //imagePath: 'http://3.137.121.138:3000/'
 };

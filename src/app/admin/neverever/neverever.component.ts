@@ -96,9 +96,9 @@ export class NevereverComponent implements OnDestroy {
     this.showListing = true;
     this.topic = {topic:'never_have_ever'};
     this.apiService.getTopicQuestion(this.topic).subscribe((response) => {
-      console.log(response)
+      //console.log(response)
       this.questions = response.data;
-      console.log(this.questions);
+      //console.log(this.questions);
       this.source.load(this.questions);
     }),
     (err: any) => console.log(err),
@@ -179,24 +179,32 @@ export class NevereverComponent implements OnDestroy {
     reader.readAsText(file);
     reader.onload = (event: any) => {
 
-      var csv = event.target.result; // Content of CSV file      
-      var lines = csv.split("\n");      
+      var csv = event.target.result; // Content of CSV file   
+        
+      var lines = csv.split("\n");     
+      console.log('data',lines) 
 
       for(var i=0;i<lines.length;i++){
         var line = lines[i];
         var data = line.split(",");
+        console.log('data',data)
         var row = [];
         for(var j=0;j<data.length;j++){         
           if(i == 0){
             let hd = data[j].replace(/\s/g, "");
             var res = hd.toLowerCase();
             this.headerData.push(res)
+            this.headerData.push('topic') 
+            //console.log("headerData",this.headerData)
           }else{
             row.push(data[j]);
+            row.push('never_have_ever');
           }          
-        }   
+        }  
+        
         if(i != 0){ 
           this.rowData.push(row);
+          //console.log("rowData",this.rowData)
         }
       }
 
@@ -206,8 +214,8 @@ export class NevereverComponent implements OnDestroy {
         for(var l=0; l < this.headerData.length;l++){
             var hData =  this.headerData[l];
             var rData = this.rowData[k][l];
-           // console.log("\n hData >>>>>>> ",hData);
-           // console.log("\n rData >>>>>>> ",rData);
+            //console.log("\n hData >>>>>>> ",hData);
+            //console.log("\n rData >>>>>>> ",rData);
             if(rData && typeof rData != undefined && rData != ""){
               //console.log(hData);
               if(hData == "answer" && rData){
@@ -227,7 +235,7 @@ export class NevereverComponent implements OnDestroy {
       }
 
       if(rrrr.length > 0){
-        console.log(rrrr);
+        //console.log('rrrr',rrrr);
         this.csvData = rrrr;
         this.source1.load(rrrr);
         this.importForm.patchValue({
@@ -240,8 +248,11 @@ export class NevereverComponent implements OnDestroy {
   }
 
   onImportConfirm(event): void {
+   // console.log(this.csvData)
 
     this.apiService.importQuestions(this.csvData).subscribe((response) => {
+
+      console.log("importQuestions",response)
 
       this.resetListing();
       this.topic = {topic:'never_have_ever'};
@@ -306,7 +317,7 @@ export class NevereverComponent implements OnDestroy {
       this.topic = {topic:'never_have_ever'};
       this.apiService.deleteQuestion(row._id).subscribe((response) => {
         this.apiService.getTopicQuestion(this.topic).subscribe((response) => {
-          this.questions = response.data.docs;
+          this.questions = response.data;
           this.source.load(this.questions);
         }),
         (err: any) => console.log(err),

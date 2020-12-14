@@ -156,8 +156,10 @@ export class PersonalitiesComponent implements OnDestroy {
     this.showAddForm = false;
     this.showEditForm = true;
 
-    this.option_1_icon_image = row.option_1_icon;
-    this.option_2_icon_image = row.option_2_icon;
+    var imgPath = environment.imagePath;
+
+    this.option_1_icon_image = imgPath+row.option_1_icon;
+    this.option_2_icon_image = imgPath+row.option_2_icon;
 
     this.profileForm.patchValue({
       _id: row._id,

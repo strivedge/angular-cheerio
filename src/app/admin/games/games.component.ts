@@ -29,6 +29,7 @@ export class GamesComponent implements OnDestroy {
   showListing = false;
   showAddForm = false;
   showEditForm = false;
+  showTopicForm = false;
   games: any;
   game_icon: any;
   topics = [];
@@ -77,7 +78,7 @@ export class GamesComponent implements OnDestroy {
     actions:{
       position: 'right',
       delete: false,
-      add: true
+      add: false
     },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -132,6 +133,7 @@ export class GamesComponent implements OnDestroy {
     this.showListing = false;
     this.showAddForm = true;
     this.showEditForm = false;
+    this.showTopicForm = true;
     this.topic = "";
     this.topics = [];
     this.profileForm.patchValue({
@@ -188,6 +190,12 @@ export class GamesComponent implements OnDestroy {
     this.showListing = false;
     this.showAddForm = false;
     this.showEditForm = true;
+    this.showTopicForm = true;
+
+    console.log("row",row)
+    if(row.topics[0] == 'would_you_rather' || row.topics[0] == 'never_have_ever'){
+      this.showTopicForm = false;
+    }
 
     this.game_icon = this.imagPath +  row.picture;
     this.topic = "";
