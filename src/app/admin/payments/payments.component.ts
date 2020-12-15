@@ -19,7 +19,10 @@ export class PaymentsComponent implements OnDestroy {
 
   profileForm = new FormGroup({
     _id: new FormControl(''),
+    user_name: new FormControl(''),
     plan_id: new FormControl(''),
+    amount: new FormControl(''),
+    plan_type: new FormControl(''),
     createdAt: new FormControl(''),
   });
 
@@ -123,10 +126,15 @@ export class PaymentsComponent implements OnDestroy {
     this.showAddForm = false;
     this.showEditForm = true;
 
+    console.log("Row",row)
+
     this.profileForm.patchValue({
       _id: row._id,
       createdAt: new DatePipe('en-US').transform(row.createdAt, 'dd-MM-y'),
-      plan_id: row.plan_id
+      plan_id: row.plan_data[0].name,
+      user_name: row.user_data[0].name,
+      amount: row.price,
+      plan_type: row.planType,
     });
 
   }

@@ -143,11 +143,9 @@ export class UsersComponent implements OnDestroy {
     this.showListing = false;
     this.showAddForm = false;
     this.showEditForm = true;
-    var country_code;
+    var country_code = '';
     if(row.country_code){
       country_code = row.country_code +" ";
-    }else{
-      country_code = '';
     }
     if(row.plan_id != "Free Subscriptoin"){
       row.plan_id = row.plan_data[0].name;
