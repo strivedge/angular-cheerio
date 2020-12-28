@@ -35,22 +35,34 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputImage" class="label col-sm-3 col-form-label">Icon</label>
+        <label for="inputImage" class="label col-sm-3 col-form-label">App Icon</label>
         <div class="col-sm-9">
           <input type="file" accept="image/*"  nbInput fullWidth (change)="uploadFile($event)">
           <input type="hidden" formControlName="app_icon" nbInput fullWidth id="inputIcon">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputName" class="label col-sm-3 col-form-label">Agora Account Id</label>
+        <label for="inputName" class="label col-sm-3 col-form-label">Agora App Id</label>
         <div class="col-sm-9">
-          <input type="text" formControlName="agora_account_id" nbInput fullWidth id="inputaccountid" placeholder="Agora Account Id">
+          <input type="text" formControlName="agora_app_id" nbInput fullWidth id="inputaccountid" placeholder="Agora App Id">
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputName" class="label col-sm-3 col-form-label">Agora Token</label>
+        <label for="inputName" class="label col-sm-3 col-form-label">Agora App Secret</label>
         <div class="col-sm-9">
-          <input type="text" formControlName="agora_token" nbInput fullWidth id="inputAgoraToken" placeholder="Free agora_token">
+          <input type="text" formControlName="agora_secret" nbInput fullWidth id="inputAgoraToken" placeholder="Agora App Secret">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputAccountId" class="label col-sm-3 col-form-label">Agora Customer Id</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="agora_customer_id" nbInput fullWidth id="inputCustomerId" placeholder="Agora Customer Id" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputAgoraToken" class="label col-sm-3 col-form-label">Agora Customer Secret</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="agora_customer_secret" nbInput fullWidth id="inputAgoraCustomerSecret" placeholder="Agora Customer Secret" required>
         </div>
       </div>
       <div class="form-group row">
@@ -87,6 +99,24 @@
         <label for="inputName" class="label col-sm-3 col-form-label">Minimum Personalities</label>
         <div class="col-sm-9">
           <input type="number" formControlName="min_personalities" nbInput fullWidth id="inputMinPersonalities" placeholder="Min Personalities" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputMinPersonalities" class="label col-sm-3 col-form-label">Amazon Access Key</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="amazon_access_key" nbInput fullWidth id="inputMinPersonalities" placeholder="Amazon Access Key" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputMinPersonalities" class="label col-sm-3 col-form-label">Amazon Secret Key</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="amazon_secret_key" nbInput fullWidth id="inputMinPersonalities" placeholder="Amazon Secret Key" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputMinPersonalities" class="label col-sm-3 col-form-label">Amazon Partner Id</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="amazon_partner_id" nbInput fullWidth id="inputMinPersonalities" placeholder="Amazon Partner Id" required>
         </div>
       </div>
       
@@ -126,22 +156,35 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputIcon" class="label col-sm-3 col-form-label">Icon</label>
+        <label for="inputImage" class="label col-sm-3 col-form-label">App Icon</label>
+        <div class="col-sm-8">
+          <input type="file" accept="image/*"  nbInput fullWidth (change)="uploadFile($event)">
+          <input type="hidden" formControlName="app_icon" nbInput fullWidth id="inputImage">
+        </div>
+        <div class="col-sm-1" class="icon-img"><div [style.background-image]="'url(' + icon1 + ')'"  ></div></div>
+      </div>
+      <div class="form-group row">
+        <label for="inputAccountId" class="label col-sm-3 col-form-label">Agora App Id</label>
         <div class="col-sm-9">
-          <input type="file" accept="image/*"  nbInput fullWidth (change)="uploadFile($event)" >
-          <input type="hidden" formControlName="app_icon" nbInput fullWidth id="inputIcon">
+          <input type="text" formControlName="agora_app_id" nbInput fullWidth id="inputAccountId" placeholder="Agora App Id" required>
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputAccountId" class="label col-sm-3 col-form-label">Agora Account Id</label>
+        <label for="inputAgoraToken" class="label col-sm-3 col-form-label">Agora App Secret</label>
         <div class="col-sm-9">
-          <input type="text" formControlName="agora_account_id" nbInput fullWidth id="inputAccountId" placeholder="Agora Account Id" required>
+          <input type="text" formControlName="agora_secret" nbInput fullWidth id="inputAgoraToken" placeholder="Agora App Secret" required>
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputAgoraToken" class="label col-sm-3 col-form-label">Agora Token</label>
+        <label for="inputAccountId" class="label col-sm-3 col-form-label">Agora Customer Id</label>
         <div class="col-sm-9">
-          <input type="text" formControlName="agora_token" nbInput fullWidth id="inputAgoraToken" placeholder="Free agora_token" required>
+          <input type="text" formControlName="agora_customer_id" nbInput fullWidth id="inputCustomerId" placeholder="Agora Customer Id" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputAgoraToken" class="label col-sm-3 col-form-label">Agora Customer Secret</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="agora_customer_secret" nbInput fullWidth id="inputAgoraCustomerSecret" placeholder="Agora Customer Secret" required>
         </div>
       </div>
       <div class="form-group row">
@@ -166,6 +209,24 @@
         <label for="inputMinPersonalities" class="label col-sm-3 col-form-label">Minimum Personalities</label>
         <div class="col-sm-9">
           <input type="number" formControlName="min_personalities" nbInput fullWidth id="inputMinPersonalities" placeholder="Min Personalities" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputMinPersonalities" class="label col-sm-3 col-form-label">Amazon Access Key</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="amazon_access_key" nbInput fullWidth id="inputMinPersonalities" placeholder="Amazon Access Key" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputMinPersonalities" class="label col-sm-3 col-form-label">Amazon Secret Key</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="amazon_secret_key" nbInput fullWidth id="inputMinPersonalities" placeholder="Amazon Secret Key" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputMinPersonalities" class="label col-sm-3 col-form-label">Amazon Partner Id</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="amazon_partner_id" nbInput fullWidth id="inputMinPersonalities" placeholder="Amazon Partner Id" required>
         </div>
       </div>
       

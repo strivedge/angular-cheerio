@@ -70,6 +70,8 @@ export class PersonalitiesComponent implements OnDestroy {
       },   
     },
     actions:{
+      add: false,
+      delete: false,
       position: 'right',
     },
     add: {

@@ -1,12 +1,24 @@
 <nb-card *ngIf="showListing">
-    <nb-card-header>
-      Vouchers
+    <nb-card-header >
+      Vouchers <button class="btn-import"  type="button" nbButton status="success" (click) ="userRedeems()" >Assigned Codes</button>
     </nb-card-header>
   
     <nb-card-body>
       <ng2-smart-table [settings]="settings" [source]="source" (create)="createVoucher()" (edit) = "editVoucher($event)" (delete)="onDeleteConfirm($event)">
       </ng2-smart-table>
+     
     </nb-card-body>
+
+</nb-card>
+
+<nb-card *ngIf="showRedeem">
+  <nb-card-header>
+    Assigned Codes <button class="btn-import" type="button" (click) = "resetListing()" nbButton status="primary">Back</button>
+  </nb-card-header>
+  <nb-card-body>
+    <ng2-smart-table [settings]="redeem_data" [source]="redeem_source" >
+    </ng2-smart-table>
+  </nb-card-body>
 </nb-card>
 
 <nb-card *ngIf="showAddForm">
@@ -112,19 +124,24 @@
       </div>
       <div class="form-group row">
         <label for="inputcodes" class="label col-sm-3 col-form-label">Codes</label>
+        
         <div class="col-sm-4">
-          <input type="text" (input)="code=$event.target.value" [value]="code" nbInput fullWidth id="inputcodes" placeholder="Codes" required>
-        </div>
-        <div class="col-sm-4">
-          <button type="button" (click) = "addCode()" nbButton status="primary">Add Code</button>
+          <button type="button" (click) = "addCode()" nbButton status="primary">Create Code</button>
         </div>
       </div>
-      <div class="form-group row">
+      <nb-card >
+      
+        <nb-card-body>
+          <ng2-smart-table [settings]="code_data" [source]="code_source" (edit) = "activeCode($event)" (delete)="onDeActiveCode($event)">
+          </ng2-smart-table>
+        </nb-card-body>
+    </nb-card>
+      <!-- <div class="form-group row">
         <label for="inputcodes" class="label col-sm-3 col-form-label">&nbsp;</label>
         <div class="col-sm-9">
           <div *ngFor="let item of codes" class="code-list">{{item}}<a href="Javascript:void(0)" (click) = "removeCode(item);">X</a></div>
         </div>
-      </div>
+      </div> -->
       
       <div class="form-group row">
         <div class="offset-sm-3 col-sm-9">

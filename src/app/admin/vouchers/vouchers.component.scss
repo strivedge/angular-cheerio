@@ -10,7 +10,7 @@
     transform: translate3d(0, 0, 0);
   }
 
-  
+  .btn-import{float: right;}
   .icon-img > div{width: 100%;background-repeat: no-repeat;padding: 25px;background-position: center;}
   
   .list-img{width: 50px;}
@@ -28,5 +28,20 @@
   ng2-smart-table-cell{
     img{width: 30px; }
   }
+}
+
+:host ::ng2-st-tbody-edit-delete {display: flex !important;
+  height: 0 !important;
+}
+
+:host ::ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+:host ::ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+  color: #5dcfe3;
 }
 

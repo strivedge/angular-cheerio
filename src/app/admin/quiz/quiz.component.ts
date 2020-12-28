@@ -127,8 +127,8 @@ export class QuizComponent implements OnDestroy {
   constructor(private themeService: NbThemeService, private service: SmartTableData, private apiService: ApiService, private _sanitizer: DomSanitizer, private sanitizer: DomSanitizer) { 
 
     this.showListing = true;
-    this.apiService.getQuestions().subscribe((response) => {
-      this.questions = response.data.docs;
+    this.apiService.getTriviaQuestions().subscribe((response) => {
+      this.questions = response.data;
       //console.log(this.questions);
       this.source.load(this.questions);
     }),
@@ -313,8 +313,8 @@ export class QuizComponent implements OnDestroy {
     this.apiService.importQuestions(this.csvData).subscribe((response) => {
 
       this.resetListing();
-      this.apiService.getQuestions().subscribe((response) => {
-        this.questions = response.data.docs;
+      this.apiService.getTriviaQuestions().subscribe((response) => {
+        this.questions = response.data;
         this.source.load(this.questions);
       }),
       (err: any) => console.log(err),
@@ -334,8 +334,8 @@ export class QuizComponent implements OnDestroy {
     delete params._id;
     this.apiService.saveQuestion(params).subscribe((response) => {
       this.resetListing();
-      this.apiService.getQuestions().subscribe((response) => {
-        this.questions = response.data.docs;
+      this.apiService.getTriviaQuestions().subscribe((response) => {
+        this.questions = response.data;
         this.source.load(this.questions);
       }),
       (err: any) => console.log(err),
@@ -351,8 +351,8 @@ export class QuizComponent implements OnDestroy {
     var params = this.profileForm.value;
     this.apiService.editQuestion(params).subscribe((response) => {
       this.resetListing();
-      this.apiService.getQuestions().subscribe((response) => {
-        this.questions = response.data.docs;
+      this.apiService.getTriviaQuestions().subscribe((response) => {
+        this.questions = response.data;
         this.source.load(this.questions);
       }),
       (err: any) => console.log(err),
@@ -368,8 +368,8 @@ export class QuizComponent implements OnDestroy {
     if (window.confirm('Are you sure you want to delete?')) {
       var row = event.data;
       this.apiService.deleteQuestion(row._id).subscribe((response) => {
-        this.apiService.getQuestions().subscribe((response) => {
-          this.questions = response.data.docs;
+        this.apiService.getTriviaQuestions().subscribe((response) => {
+          this.questions = response.data;
           this.source.load(this.questions);
         }),
         (err: any) => console.log(err),

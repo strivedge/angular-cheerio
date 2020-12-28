@@ -23,17 +23,23 @@ export class SettingsComponent implements OnDestroy {
     app_description: new FormControl(''),
     app_version: new FormControl('',Validators.required),
     app_icon: new FormControl('',Validators.required),
-    agora_account_id: new FormControl('',Validators.required),
-    agora_token: new FormControl('',Validators.required),
+    agora_app_id: new FormControl('',Validators.required),
+    agora_secret: new FormControl('',Validators.required),
+    agora_customer_id: new FormControl('',Validators.required),
+    agora_customer_secret: new FormControl('',Validators.required),
     free_month: new FormControl('',Validators.required),
     free_credits: new FormControl('',Validators.required),
     min_interests: new FormControl('',Validators.required),
     min_personalities: new FormControl('',Validators.required),
+    amazon_access_key:new FormControl(),
+    amazon_secret_key:new FormControl(),
+    amazon_partner_id:new FormControl(),
   });
 
   showListing = false;
   showAddForm = false;
   showEditForm = false;
+  icon1: any;
   setting: any;
   imagPath = environment.imagePath;
 
@@ -96,7 +102,11 @@ export class SettingsComponent implements OnDestroy {
       console.log(this.setting.length)
 
       if(this.setting.length > 0){
-        console.log('If')
+        
+        var imgPath = environment.imagePath;
+        this.icon1 = imgPath+this.setting[0].app_icon;
+
+        console.log('If',imgPath+this.setting[0].app_icon)
         
         this.profileForm.patchValue({
           _id: this.setting[0]._id,
@@ -104,15 +114,21 @@ export class SettingsComponent implements OnDestroy {
           app_description:this.setting[0].app_description,
           app_version:this.setting[0].app_version,
           app_icon: imgPath + this.setting[0].app_icon,
-          agora_account_id:this.setting[0].agora_account_id,
-          agora_token:this.setting[0].agora_token,
+          agora_app_id:this.setting[0].agora_app_id,
+          agora_secret:this.setting[0].agora_secret,
+          agora_customer_id:this.setting[0].agora_customer_id,
+          agora_customer_secret:this.setting[0].agora_customer_secret,
           free_month:this.setting[0].free_month,
           free_credits:this.setting[0].free_credits,
           min_interests:this.setting[0].min_interests,
           min_personalities:this.setting[0].min_personalities,
+          amazon_access_key:this.setting[0].amazon_access_key,
+          amazon_secret_key:this.setting[0].amazon_secret_key,
+          amazon_partner_id:this.setting[0].amazon_partner_id,
         });
       }else{
         console.log('Else')
+        this.icon1 = "";
         
         this.profileForm.patchValue({
           _id: "",
@@ -120,12 +136,17 @@ export class SettingsComponent implements OnDestroy {
           app_description:"",
           app_version:"",
           app_icon: "",
-          agora_account_id: "",
-          agora_token:"",
+          agora_app_id: "",
+          agora_secret:"",
+          agora_customer_id:"",
+          agora_customer_secret:"",
           free_month:"",
           free_credits:"",
           min_interests:"",
           min_personalities:"",
+          amazon_access_key:"",
+          amazon_secret_key:"",
+          amazon_partner_id:"",
         });
       }
       
@@ -159,18 +180,24 @@ export class SettingsComponent implements OnDestroy {
     this.showListing = false;
     this.showAddForm = true;
     this.showEditForm = false;
+    this.icon1 = "";
     this.profileForm.patchValue({
       _id: "",
       app_name: "",
       app_description:"",
       app_version:"",
       app_icon: "",
-      agora_account_id: "",
-      agora_token:"",
+      agora_app_id: "",
+      agora_secret:"",
+      agora_customer_id:"",
+      agora_customer_secret:"",
       free_month:"",
       free_credits:"",
       min_interests:"",
-      min_personalities:""
+      min_personalities:"",
+      amazon_access_key:"",
+      amazon_secret_key:"",
+      amazon_partner_id:"",
 
     });
   }
@@ -178,6 +205,9 @@ export class SettingsComponent implements OnDestroy {
   editSetting(event): void {
     console.log(event);
     var row = event.data;
+
+    var imgPath = environment.imagePath;
+    this.icon1 = imgPath+row.app_icon;
     
     this.showListing = false;
     this.showAddForm = false;
@@ -189,12 +219,17 @@ export class SettingsComponent implements OnDestroy {
       app_description:row.app_description,
       app_version:row.app_version,
       app_icon: row.app_icon,
-      agora_account_id:row.agora_account_id,
-      agora_token:row.agora_token,
+      agora_app_id:row.agora_app_id,
+      agora_secret:row.agora_secret,
+      agora_customer_id:row.agora_customer_id,
+      agora_customer_secret:row.agora_customer_secret,
       free_month:row.free_month,
       free_credits:row.free_credits,
       min_interests:row.min_interests,
       min_personalities:row.min_personalities,
+      amazon_access_key:row.amazon_access_key,
+      amazon_secret_key:row.amazon_secret_key,
+      amazon_partner_id:row.amazon_partner_id,
     });
 
   }

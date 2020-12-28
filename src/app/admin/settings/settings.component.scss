@@ -11,6 +11,8 @@
   }
   
   .list-img{width: 50px;}
+  .icon-img > div{width: 100%;background-repeat: no-repeat;padding: 25px;background-position: center;}
+  
 
   @include media-breakpoint-down(sm) {
     ngx-traffic {

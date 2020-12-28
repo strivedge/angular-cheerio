@@ -114,6 +114,10 @@ export class ApiService{
   getQuestions(): Observable<any> {    
     return this.http.get("/api/questions/");
   }
+  getTriviaQuestions(): Observable<any> {    
+    return this.http.get("/api/questions/trivia");
+  }
+
   getTopicQuestion(parms): Observable<any> {    
     return this.http.post("/api/questions/topic",parms);
   }
@@ -154,6 +158,14 @@ export class ApiService{
     return this.http.get("/api/vouchers/");
   }
 
+  getVoucher(id): Observable<any> {    
+    return this.http.get("/api/vouchers/"+id);
+  }
+
+  getUserRedeems(): Observable<any> {    
+    return this.http.get("/api/vouchers/user-voucher");
+  }
+
   saveVoucher(parms): Observable<any> {    
     return this.http.post("/api/vouchers/",parms);
   }
@@ -169,6 +181,19 @@ export class ApiService{
   addremVoucherCode(parms): Observable<any> {    
     return this.http.put("/api/vouchers/code",parms);
   }
+
+  createGiftCard(parms): Observable<any> {    
+    return this.http.post("/api/amazon/createGiftCard",parms);
+  }
+
+  deactiveGiftCard(parms): Observable<any> {    
+    return this.http.post("/api/amazon/deactiveGiftCard",parms);
+  }
+
+  cancelGiftCard(parms): Observable<any> {    
+    return this.http.post("/api/amazon/cancelGiftCard",parms);
+  }
+
 
   getSettings(): Observable<any> {    
     return this.http.get("/api/settings/");
