@@ -57,19 +57,40 @@
         </div>
       </div>
       
-      <div class="form-group row" *ngIf="displayType==='subscription' ||displayType==='combo' " >
+      <div class="form-group row" *ngIf="displayType==='subscription' || displayType==='combo' " >
         <label for="inputMonth" class="label col-sm-3 col-form-label">Months</label>
         <div class="col-lg-9">
           <input type="text" (input)="checkfirstZero($event)" name="months" maxlength="2" formControlName="months" nbInput fullWidth id="months" placeholder="Month" >
         </div>
       </div>
 
-      <div class="form-group row" *ngIf="displayType==='subscription' ||displayType==='combo' ">
+      <div class="form-group row" *ngIf="displayType==='subscription' || displayType==='combo' ">
         <label for="inputCreditPrice" class="label col-sm-3 col-form-label">Price Per Month</label>
         <div class="col-sm-9">
           <input type="text" formControlName="price_per_month" name="price_per_month" nbInput fullWidth id="price_per_month" placeholder="Price per month" >
         </div>
-      </div>     
+      </div>  
+
+      <div class="form-group row" >
+        <label for="inputCreditPrice" class="label col-sm-3 col-form-label">Google Plan Id</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="product_id" name="product_id" nbInput fullWidth id="product_id" placeholder="Google Plan Id" required>
+        </div>
+      </div>  
+
+      <div class="form-group row" >
+        <label for="inputCreditPrice" class="label col-sm-3 col-form-label">Apple Plan Id</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="apple_plan_id" name="apple_plan_id" nbInput fullWidth id="apple_plan_id" placeholder="Apple Plan Id" required>
+        </div>
+      </div> 
+
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Display Plan</label>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="dispaly_plan" (click) = "dispaly_plan(1)"></nb-checkbox>
+        </div>        
+      </div>
       
       <div class="form-group row">
         <div class="offset-sm-3 col-sm-9">
@@ -141,8 +162,27 @@
         <div class="col-sm-9">
           <input type="text" formControlName="price_per_month" name="price_per_month" nbInput fullWidth id="price_per_month" placeholder="Price per month" >
         </div>
-      </div>     
+      </div>
+
+      <div class="form-group row" >
+        <label for="inputCreditPrice" class="label col-sm-3 col-form-label">Google Plan Id</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="product_id" name="product_id" nbInput fullWidth id="product_id" placeholder="Google Plan Id" required>
+        </div>
+      </div>   
+      <div class="form-group row" >
+        <label for="inputCreditPrice" class="label col-sm-3 col-form-label">Apple Plan Id</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="apple_plan_id" name="apple_plan_id" nbInput fullWidth id="apple_plan_id" placeholder="Apple Plan Id" required>
+        </div>
+      </div>    
           
+      <div class="form-group row">
+        <label for="inputImage" class="label col-sm-3 col-form-label">Display Plan</label>
+        <div class="col-sm-2">
+          <nb-checkbox formControlName="dispaly_plan" (click) = "dispaly_plan(1)"></nb-checkbox>
+        </div>        
+      </div>
       
       <div class="form-group row">
         <div class="offset-sm-3 col-sm-9">

@@ -45,7 +45,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'question-mark-circle-outline',
     link: '/admin/neverever',
   }, 
-  
+  {
+    title: 'Heads Up',
+    icon: 'question-mark-circle-outline',
+    link: '/admin/headsup',
+  },   
   {
     title: 'Masters',
     group: true,
@@ -85,6 +89,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Vouchers',
     icon: 'keypad',
     link: '/admin/vouchers',
+  }, 
+
+  {
+    title: 'Notification Log',
+    icon: 'keypad',
+    link: '/admin/log',
   }, 
   
 ];

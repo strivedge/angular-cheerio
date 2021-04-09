@@ -24,7 +24,10 @@ export class PlansComponent implements OnDestroy {
     credits: new FormControl(''),
     price_per_credit: new FormControl(''),
     months: new FormControl(''),
-    price_per_month: new FormControl('')
+    price_per_month: new FormControl(''),
+    product_id: new FormControl('', Validators.required),
+    apple_plan_id: new FormControl('', Validators.required),
+    dispaly_plan: new FormControl('')
   });
 
   showListing = false;
@@ -110,7 +113,10 @@ export class PlansComponent implements OnDestroy {
       credits: "",
       price_per_credit: "",
       months: "",
-      price_per_month: ""
+      price_per_month: "",
+      product_id: "",
+      apple_plan_id: "",
+      dispaly_plan:false,
     });
     this.displayType = "credits";
   }
@@ -132,7 +138,10 @@ export class PlansComponent implements OnDestroy {
       credits: row.credits,
       price_per_credit: row.price_per_credit,
       months: row.months,
-      price_per_month: row.price_per_month
+      price_per_month: row.price_per_month,
+      product_id: row.product_id,
+      apple_plan_id:row.apple_plan_id,
+      dispaly_plan: row.dispaly_plan,
     });
 
   }
@@ -190,6 +199,14 @@ export class PlansComponent implements OnDestroy {
     () => {}
     ;
   }
+
+  dispaly_plan(event){
+
+    this.profileForm.patchValue({
+      //dispaly_plan: false, 
+    }); 
+  }
+
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {

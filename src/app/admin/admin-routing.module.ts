@@ -9,6 +9,7 @@ import { GamesComponent } from './games/games.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { WouldyouratherComponent } from './wouldyourather/wouldyourather.component';
 import { NevereverComponent } from './neverever/neverever.component';
+import { HeadsupComponent } from './headsup/headsup.component';
 
 import { PersonalitiesComponent } from './personalities/personalities.component';
 import { UsersComponent } from './users/users.component';
@@ -16,6 +17,7 @@ import { PaymentsComponent } from './payments/payments.component';
 import { RedeemsComponent } from './redeems/redeems.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { SettingsComponent } from './settings/settings.component';
+import { NotificationLogComponent } from './notificationlog/notificationlog.component';
 
 const routes: Routes = [{
   path: '',
@@ -46,6 +48,10 @@ const routes: Routes = [{
       component: NevereverComponent,
     },
     {
+      path: 'headsup',
+      component: HeadsupComponent,
+    },
+    {
       path: 'personalities',
       component: PersonalitiesComponent,
     },
@@ -72,6 +78,10 @@ const routes: Routes = [{
     {
       path: 'settings',
       component: SettingsComponent,
+    },
+    {
+      path: 'log',
+      component: NotificationLogComponent,
     },
   ],
 }];

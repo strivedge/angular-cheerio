@@ -119,7 +119,12 @@
           <input type="text" formControlName="amazon_partner_id" nbInput fullWidth id="inputMinPersonalities" placeholder="Amazon Partner Id" required>
         </div>
       </div>
-      
+      <div class="form-group row">
+        <label for="inputcall_limit" class="label col-sm-3 col-form-label">Call limit</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="call_limit" nbInput fullWidth id="inputcall_limit" placeholder="Call Limit" required>
+        </div>
+      </div>
       <div class="form-group row">
         <div class="offset-sm-3 col-sm-9">
           <button type="submit" [disabled]="!profileForm.valid"  nbButton status="success">Save</button>&nbsp;&nbsp;
@@ -227,6 +232,12 @@
         <label for="inputMinPersonalities" class="label col-sm-3 col-form-label">Amazon Partner Id</label>
         <div class="col-sm-9">
           <input type="text" formControlName="amazon_partner_id" nbInput fullWidth id="inputMinPersonalities" placeholder="Amazon Partner Id" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputcall_limit" class="label col-sm-3 col-form-label">Call limit</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="call_limit" nbInput fullWidth id="inputcall_limit" placeholder="Call Limit" required>
         </div>
       </div>
       

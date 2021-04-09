@@ -34,6 +34,7 @@ export class SettingsComponent implements OnDestroy {
     amazon_access_key:new FormControl(),
     amazon_secret_key:new FormControl(),
     amazon_partner_id:new FormControl(),
+    call_limit:new FormControl(),
   });
 
   showListing = false;
@@ -125,6 +126,7 @@ export class SettingsComponent implements OnDestroy {
           amazon_access_key:this.setting[0].amazon_access_key,
           amazon_secret_key:this.setting[0].amazon_secret_key,
           amazon_partner_id:this.setting[0].amazon_partner_id,
+          call_limit:this.setting[0].call_limit,
         });
       }else{
         console.log('Else')
@@ -147,6 +149,7 @@ export class SettingsComponent implements OnDestroy {
           amazon_access_key:"",
           amazon_secret_key:"",
           amazon_partner_id:"",
+          call_limit:""
         });
       }
       
@@ -198,6 +201,7 @@ export class SettingsComponent implements OnDestroy {
       amazon_access_key:"",
       amazon_secret_key:"",
       amazon_partner_id:"",
+      call_limit:""
 
     });
   }

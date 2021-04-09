@@ -211,4 +211,8 @@ export class ApiService{
     return this.http.delete("/api/settings/"+id);
   }
 
+  getNotificationLog(): Observable<any> {    
+    return this.http.get("/api/notifications/log/");
+  }
+
 }

@@ -193,7 +193,7 @@ export class GamesComponent implements OnDestroy {
     this.showTopicForm = true;
 
     console.log("row",row)
-    if(row.topics[0] == 'would_you_rather' || row.topics[0] == 'never_have_ever'){
+    if(row.topics[0] == 'would_you_rather' || row.topics[0] == 'never_have_ever' || row.topics[0] == 'heads_up'){
       this.showTopicForm = false;
     }
 
